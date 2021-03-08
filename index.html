@@ -6,12 +6,26 @@
     <title>RCM Level 10 Scales</title>
     <meta charset="utf-8">
     <script src="./generate.js"></script>
+    <script src="./selectAll.js"></script>
     <style>
         article {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
             flex-direction: column;
+        }
+        
+        #checkboxes {
+            margin: 0 auto;
+            border-style: solid;
+            padding: 10px 10px 10px 10px;
+            margin-bottom: 20px;
+            border-width: 0.5px;
+        }
+        
+        ul {
+            list-style-type: none;
+            display: inline-block;
         }
     </style>
 </head>
@@ -23,8 +37,24 @@
         <p style=" text-align: center; ">Created by ThisNoobPlays</p>
     </header>
     <article>
-        <button onclick="onGenerate()" style="order: 0; width: 40%; margin-left: 30%; font-size: large;">Generate</button>
-        <p style="font-size: 40px; text-align: center; order: 1;" id="scale-text"></p>
+        <div id="checkboxes">
+            <button style="display: inline-block;" id="select-all" onclick="selectAll()">Select All</button>
+            <ul>
+                <li><input checked type="checkbox" name="scales" id="scales-check">
+                    <label for="scales">Scales</label>
+                </li>
+                <li>
+                    <input checked type="checkbox" name="chords" id="chords-check">
+                    <label for="chords">Chords</label>
+                </li>
+                <li>
+                    <input checked type="checkbox" name="arpeggios" id="arpeggios-check">
+                    <label for="arpeggios">Arpeggios</label>
+                </li>
+            </ul>
+        </div>
+        <button onclick="onGenerate()" style=" width: 40%; margin-left: 30%; font-size: large;">Generate</button>
+        <p style="font-size: 40px; text-align: center;" id="scale-text"></p>
     </article>
 </body>
 

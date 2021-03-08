@@ -15,9 +15,30 @@ let minorTonicArp = ["G flat Minor tonic arpeggios root position and inversions"
 let dom7Arp = ["G flat Major dominant 7th arpeggios root position and inversions", "G Major dominant 7th arpeggios root position and inversions", "A flat Major dominant 7th arpeggios root position and inversions", "A Major dominant 7th arpeggios root position and inversions", "B flat Major dominant 7th arpeggios root position and inversions", "B Major dominant 7th arpeggios root position and inversions"];
 let dim7Arp = ["G flat Major diminished 7th arpeggios root position and inversions", "G Major diminished 7th arpeggios root position and inversions", "A flat Major diminished 7th arpeggios root position and inversions", "A Major diminished 7th arpeggios root position and inversions", "B flat Major diminished 7th arpeggios root position and inversions", "B Major diminished 7th arpeggios root position and inversions"];
 let all = [major4octave, harmonicMinor4octave, melodicMinor4octave, sep3, sep6, inOctavesMajor, inOctavesMinor, chromaticInOctaves, fourNoteChordsMinor, fourNoteChordsMajor, dominant7th, dim7th, majorTonicArp, minorTonicArp, dim7Arp, dom7Arp];
+let justScales = [major4octave, harmonicMinor4octave, melodicMinor4octave, sep3, sep6, inOctavesMajor, inOctavesMinor, chromaticInOctaves];
+let justChords = [fourNoteChordsMajor, fourNoteChordsMinor, dominant7th, dim7th];
+let justArpeggios = [majorTonicArp, minorTonicArp, dom7Arp, dim7Arp];
+
+function checkboxStatus() {
+    let scales = document.getElementById("scales-check").checked;
+    let chords = document.getElementById("chords-check").checked;
+    let arps = document.getElementById("arpeggios-check").checked;
+    return [scales, chords, arps];
+}
 
 function onGenerate() {
-    let scale = pickSubsection(pickSubsection(all));
+    let selected = [];
+    let checked = checkboxStatus();
+    if (checked[0]) {
+        selected = selected.concat(justScales);
+    }
+    if (checked[1]) {
+        selected = selected.concat(justChords);
+    }
+    if (checked[2]) {
+        selected = selected.concat(justArpeggios);
+    }
+    let scale = pickSubsection(pickSubsection(selected));
     document.getElementById("scale-text").innerHTML = scale;
 }
 
