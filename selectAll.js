@@ -1,6 +1,6 @@
 function selectAll() {
     let checkboxes = document.getElementsByTagName("input");
-    for (input of checkboxes) {
+    for (let input of checkboxes) {
         input.checked = true;
     }
 }
