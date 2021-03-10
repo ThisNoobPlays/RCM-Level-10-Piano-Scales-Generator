@@ -7,6 +7,7 @@
     <meta charset="utf-8">
     <script src="./generate.js"></script>
     <script src="./selectAll.js"></script>
+    <script src="./spacedRepetitionHandler.js"></script>
     <style>
         article {
             display: flex;
@@ -52,10 +53,13 @@
                     <label for="arpeggios">Arpeggios</label>
                 </li>
             </ul>
+            <button id="spaced-repetition-button" style="display: block; margin-top: 50px;" onclick="onSpacedRepetition()">Enable Spaced Repetition</button>
         </div>
         <button onclick="onGenerate()" style=" width: 40%; margin-left: 30%; font-size: large;">Generate</button>
         <p style="font-size: 40px; text-align: center;" id="scale-text"></p>
         <p style="text-align: center;" id="tip-text"></p>
+        <button style="width: 25%; margin-left: 37.5%;" onclick="again()">Again</button>
+        <button style="width: 25%; margin-left: 37.5%;" onclick="good()">Good</button>
     </article>
 </body>
 

@@ -18,12 +18,44 @@ const all = [major4octave, harmonicMinor4octave, melodicMinor4octave, sep3, sep6
 const justScales = [major4octave, harmonicMinor4octave, melodicMinor4octave, sep3, sep6, inOctavesMajor, inOctavesMinor, chromaticInOctaves];
 const justChords = [fourNoteChordsMajor, fourNoteChordsMinor, dominant7th, dim7th];
 const justArpeggios = [majorTonicArp, minorTonicArp, dom7Arp, dim7Arp];
+let box1 = [];
+let box2 = [];
+let box3 = [];
 
 function checkboxStatus() { // Get status of checkboxes
     let scales = document.getElementById("scales-check").checked;
     let chords = document.getElementById("chords-check").checked;
     let arps = document.getElementById("arpeggios-check").checked;
     return [scales, chords, arps];
+}
+
+function again() {
+    let textObject = document.getElementById("scale-text");
+    let scale = textObject.innerHTML;
+    if (box2.includes(scale)) {
+        console.log("wtf");
+        box2.splice(box2.indexOf(scale), 1);
+        box1.push(scale);
+    }
+    console.log(box1);
+    console.log(box2);
+    console.log(box3);
+}
+
+function good() {
+    let textObject = document.getElementById("scale-text");
+    let scale = textObject.innerHTML;
+    if (box1.includes(scale)) {
+
+        box1.splice(box1.indexOf(scale), 1);
+        box2.push(scale);
+    } else if (box2.includes(scale)) {
+        box2.splice(box2.indexOf(scale), 1);
+        box3.push(scale);
+    }
+    console.log(box1);
+    console.log(box2);
+    console.log(box3);
 }
 
 function onGenerate() {
@@ -42,11 +74,30 @@ function onGenerate() {
         selected = selected.concat(justArpeggios);
 
     }
-    let scale = pickSubsection(pickSubsection(selected));
-    while (currentText == scale) {
-        scale = pickSubsection(pickSubsection(selected)); //Prevent generating the exact same scale
-    }
+    let scale;
 
+    if (box1.length + box2.length + box3.length < 3) {
+        scale = pickSubsection(pickSubsection(selected));
+        while (currentText == scale) {
+            scale = pickSubsection(pickSubsection(selected)); //Prevent generating the exact same scale
+        }
+    } else {
+        if (box1.length > 0) {
+            do {
+                scale = pickSubsection(box1);
+            } while (currentText == scale && box1.length != 1);
+        } else if (box2.length > 0) {
+            do {
+                scale = pickSubsection(box2);
+            } while (currentText == scale && box2.length != 1);
+        } else {
+            box3 = [];
+            do {
+
+                scale = pickSubsection(pickSubsection(selected));
+            } while (currentText == scale);
+        }
+    }
     if (scale.includes("3rd")) { // Tips
         tipObject.innerHTML = "Tip: Left hand starts on indicated note. Right hand starts 4 semitones above the left hand";
     } else if (scale.includes("6th")) {
@@ -56,6 +107,9 @@ function onGenerate() {
     }
 
     textObject.innerHTML = scale;
+    if (spacedRepetition && !box1.includes(scale) && !box2.includes(scale) && !box3.includes(scale)) {
+        box1.push(scale);
+    }
 }
 
 function pickSubsection(array) {

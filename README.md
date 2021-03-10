@@ -10,3 +10,6 @@ Chords: 4-note tonic chords, dominant 7th chords, and diminished 7th chords.
 Arpeggios: Normal arpeggios, dominant 7th arpeggios, and leading-tone diminished 7th arpeggios.
 
 Click the "generate" button to generate a result.
+
+
+There is a spaced repetition option that trains you on 3 scales until you get good at them.
