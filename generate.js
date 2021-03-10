@@ -18,9 +18,9 @@ const all = [major4octave, harmonicMinor4octave, melodicMinor4octave, sep3, sep6
 const justScales = [major4octave, harmonicMinor4octave, melodicMinor4octave, sep3, sep6, inOctavesMajor, inOctavesMinor, chromaticInOctaves];
 const justChords = [fourNoteChordsMajor, fourNoteChordsMinor, dominant7th, dim7th];
 const justArpeggios = [majorTonicArp, minorTonicArp, dom7Arp, dim7Arp];
-let box1 = [];
-let box2 = [];
-let box3 = [];
+var box1 = [];
+var box2 = [];
+var box3 = [];
 
 function checkboxStatus() { // Get status of checkboxes
     let scales = document.getElementById("scales-check").checked;
@@ -40,6 +40,9 @@ function again() {
     console.log(box1);
     console.log(box2);
     console.log(box3);
+    document.getElementById("generate").disabled = false;
+    document.getElementById("good").style.visibility = "hidden";
+    document.getElementById("again").style.visibility = "hidden";
 }
 
 function good() {
@@ -56,6 +59,10 @@ function good() {
     console.log(box1);
     console.log(box2);
     console.log(box3);
+
+    document.getElementById("generate").disabled = false;
+    document.getElementById("good").style.visibility = "hidden";
+    document.getElementById("again").style.visibility = "hidden";
 }
 
 function onGenerate() {
@@ -109,6 +116,12 @@ function onGenerate() {
     textObject.innerHTML = scale;
     if (spacedRepetition && !box1.includes(scale) && !box2.includes(scale) && !box3.includes(scale)) {
         box1.push(scale);
+    }
+
+    if (spacedRepetition) {
+        document.getElementById("good").style.visibility = "visible";
+        document.getElementById("again").style.visibility = "visible";
+        document.getElementById("generate").disabled = true;
     }
 }
 
