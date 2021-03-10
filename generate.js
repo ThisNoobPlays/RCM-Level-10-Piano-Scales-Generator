@@ -21,6 +21,7 @@ const justArpeggios = [majorTonicArp, minorTonicArp, dom7Arp, dim7Arp];
 var box1 = [];
 var box2 = [];
 var box3 = [];
+var special = [];
 
 function checkboxStatus() { // Get status of checkboxes
     let scales = document.getElementById("scales-check").checked;
@@ -48,8 +49,9 @@ function again() {
 function good() {
     let textObject = document.getElementById("scale-text");
     let scale = textObject.innerHTML;
-    if (box1.includes(scale)) {
-
+    if (countOccurrences(special, scale) == 1) {
+        box1.splice(box1.indexOf(scale), 1);
+    } else if (box1.includes(scale)) {
         box1.splice(box1.indexOf(scale), 1);
         box2.push(scale);
     } else if (box2.includes(scale)) {
@@ -114,6 +116,7 @@ function onGenerate() {
     }
 
     textObject.innerHTML = scale;
+    special.push(scale);
     if (spacedRepetition && !box1.includes(scale) && !box2.includes(scale) && !box3.includes(scale)) {
         box1.push(scale);
     }
@@ -128,4 +131,14 @@ function onGenerate() {
 function pickSubsection(array) {
     let randomIndex = Math.floor(Math.random() * (array.length) + 0);
     return array[randomIndex];
+}
+
+function countOccurrences(array, n) {
+    let count = 0;
+    for (let i of array) {
+        if (i == n) {
+            count++;
+        }
+    }
+    return count;
 }
